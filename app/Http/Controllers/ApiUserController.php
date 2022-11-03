@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class ApiUserController extends Controller
 {
     public function index(Request $request)
     {
-        UserHit::simpan();
-        $respon = 'Selamat Datang, ' . \Auth::user()->name;
+        // UserHit::simpan();
+        $respon = 'Selamat Datang, ' . Auth::user()->name;
         return
             [
                 'success' => true,
@@ -26,11 +27,13 @@ class ApiUserController extends Controller
                 'name' => 'required|min:2|max:50',
                 'email' => 'required|min:2|max:50|email',
                 'password' => 'required|min:2|max:30',
+                'nomor_hp' => 'required|min:2|max:13',
             ]
         );
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->nomor_hp = $request->nomor_hp;
         $user->password = Hash::make($request->password);
         $user->save();
         // $user = new \App\User();

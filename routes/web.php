@@ -1,6 +1,6 @@
 <?php
 
-use App\Syarat;
+use App\Order;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    $syarat = Syarat::all();
+    $syarat = Order::all();
     return view('welcome', compact('syarat'));
 });
 

@@ -29,7 +29,6 @@ class ApiLoginController extends Controller
         } else {
             return response()->json([
                 'succes' => false,
-                'data' => '',
                 'pesan' => 'Login Gagal'
 
             ], 401);

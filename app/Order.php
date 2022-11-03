@@ -5,9 +5,9 @@ namespace App;
 use Storage;
 use Illuminate\Database\Eloquent\Model;
 
-class Syarat extends Model
+class Order extends Model
 {
-    protected $table = 'syarats';
+    protected $table = 'orders';
     protected $with =  ['user'];
     public function user()
     {

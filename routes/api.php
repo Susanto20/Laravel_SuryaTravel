@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ApiSyaratController;
+use App\Http\Controllers\ApiLoginController;
+use App\Http\Controllers\ApiOrderController;
 use App\Http\Controllers\ApiUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,9 @@ Route::group(['middleware' => ['throttle:60,1']], function () {
     });
 });
 
-// Route::resource('syarat', 'ApiSyaratController');
+// Route::resource('order', 'ApiOrderController');
 
-Route::get('syarat/show', [ApiSyaratController::class, 'index']);
-Route::post('syarat/store', [ApiSyaratController::class, 'store']);
-Route::post('login', 'ApiLoginController@login');
+Route::get('order/show', [ApiOrderController::class, 'index']);
+Route::post('order/store', [ApiOrderController::class, 'store']);
+Route::post('login', [ApiLoginController::class, 'login']);
 Route::post('user/register', [ApiUserController::class, 'store']);
