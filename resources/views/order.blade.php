@@ -1,24 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head> -->
-
-<!-- <body>
-    <h1>hi</h1>
-    @foreach ($syarat as $syt )
-    <img src="{{asset('/syarat').'/'.$syt->file}}" alt="{{asset('/syarat/').$syt->file}}"/>
-
-    @endforeach
-</body> -->
-<!-- <body>
-    <h1>Hallo semua</h1>
-</body>
-</html> -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Dashboard Surya Travel</title>
+    <title>Transaksi</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -58,13 +37,13 @@
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link" aria-current="page" href="/">
               <span data-feather="home" class="align-text-bottom"></span>
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="order">
+            <a class="nav-link active" href="order">
               <span data-feather="file" class="align-text-bottom"></span>
               Orders
             </a>
@@ -87,23 +66,18 @@
           </a>
         </h6>
         <ul class="nav flex-column mb-2">
-                
-         
+                  
         </ul>
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
+        <h1 class="h2">Transaksi</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-          <span data-feather="message-circle" class="align-text-bottom"></span>
-            Notifikasi
-          </button>
-        </div>
+          <div class="btn-group me-2">     
+                </div>
+                  </div>
       </div>
 
       <div class="table-responsive">
@@ -134,11 +108,9 @@
               <td>
               <a class="badge bg-info" href="#">
               <span data-feather="edit"></span>
-              Terima Pesanan
                  </a>
                 <a class="badge bg-danger" href="#">
               <span data-feather="x-circle"></span>
-              Tolak Pesanan
                     </a>
               </td>
             </tr>
@@ -154,11 +126,9 @@
               <td>
               <a class="badge bg-info" href="#">
               <span data-feather="edit"></span>
-              Terima Pesanan
                  </a>
                 <a class="badge bg-danger" href="#">
               <span data-feather="x-circle"></span>
-              Tolak Pesanan
                     </a>
               </td>
             </tr>
@@ -174,11 +144,9 @@
               <td>
               <a class="badge bg-info" href="#">
               <span data-feather="edit"></span>
-              Terima Pesanan
                  </a>
                 <a class="badge bg-danger" href="#">
               <span data-feather="x-circle"></span>
-              Tolak Pesanan
                     </a>
               </td>
             </tr>
@@ -187,7 +155,6 @@
           </tbody>
         </table>
       </div>
-
     </main>
   </div>
 </div>

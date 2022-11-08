@@ -18,16 +18,13 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     $syarat = Order::all();
     return view('welcome', compact('syarat'));
+    // return view('welcome');
 });
 
-Auth::routes();
+Route::get('/order', function () {
+    return view('order');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/laporan', function() {
+    return view('laporan');
+});
