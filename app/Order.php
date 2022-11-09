@@ -9,6 +9,16 @@ class Order extends Model
 {
     protected $table = 'orders';
     protected $with =  ['user'];
+    protected $fillable = [
+        'user_id',
+        'tujuan',
+        'tanggal_berangkat',
+        'jam',
+        'jumlah_kursi',
+        'file',
+        'status',
+        'total',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

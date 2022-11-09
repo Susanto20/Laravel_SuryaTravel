@@ -34,16 +34,15 @@ class ApiOrderController extends Controller
         $orders->status = $request->status;
         $orders->total = $request->total;
         $orders->file = $request->file;
-        // if ($request->hasFile('file')) {
-        //     $file = $request->file('file');
-        //     $filename = time() . '-' . $file->getClientOriginalName();
-        //     $request->file->move(public_path('orders'), $filename);
-        //     $orders->file = $filename;
-        //     $orders->save();
-        // } else {
-        //     $orders->save();
-        // }
-        $orders->save();
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $request->file->move(public_path('orders'), $filename);
+            $orders->file = $filename;
+            $orders->save();
+        } else {
+            $orders->save();
+        }
         return response()->json([
             'success' => true,
             'status' => 200,

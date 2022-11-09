@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Order;
+use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,14 +19,15 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     $syarat = Order::all();
-    return view('welcome', compact('syarat'));
+    $users  = User::all();
+    return view('welcome', compact('syarat', 'users'));
     // return view('welcome');
 });
-
+Route::post('proses-pesanan/{id}', [AdminController::class, 'proses'])->name('admin.proses');
 Route::get('/order', function () {
     return view('order');
 });
 
-Route::get('/laporan', function() {
+Route::get('/laporan', function () {
     return view('laporan');
 });
