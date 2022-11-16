@@ -32,7 +32,13 @@
             aria-label="Search">
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+                @if (Auth::check())
+                    <a class="nav-link px-3" href="#">{{ Auth::user()->email }}</a>
+                @else
+                    <script>
+                        window.location.href = "{{ route('auth.login') }}"
+                    </script>
+                @endif
             </div>
         </div>
     </header>
@@ -48,35 +54,43 @@
                                 Dashboard
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="order">
-                                <span data-feather="file" class="align-text-bottom"></span>
-                                Orders
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="laporan">
-                                <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-                                Laporan
-                            </a>
-                        </li>
 
                     </ul>
 
                     <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                         <span>Cetak Laporan</span>
-                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <a class="link-secondary" href="generate-pdf" aria-label="Add a new report">
                             <span data-feather="printer" class="align-text-bottom"></span>
                         </a>
                     </h6>
                     <ul class="nav flex-column mb-2">
 
-
+                        <li class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                            {{-- <form action="{{ route('logout.store') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="nav-link" aria-current="page" href="#">
+                                    <span data-feather="log-out" class="align-text-bottom"></span>
+                                    Log Out
+                                </button>
+                            </form> --}}
+                            <form method="get" action="{{ route('logout.store') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-dark" aria-current="page" href="#">
+                                    <span data-feather="log-out" class="align-text-bottom"></span>
+                                    Log Out
+                                </button>
+                                {{-- <button href="route('logout')"
+                                    onclick="event.preventDefault(); 
+                                                                    this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </button> --}}
+                            </form>
+                        </li>
                     </ul>
+
                 </div>
+
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -86,10 +100,7 @@
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                         </div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            <span data-feather="message-circle" class="align-text-bottom"></span>
-                            Notifikasi
-                        </button>
+
                     </div>
                 </div>
 
@@ -103,8 +114,9 @@
                                 <th scope="col">Tanggal Berangkat</th>
                                 <th scope="col">Jam Berangkat</th>
                                 <th scope="col">Jumlah Kursi</th>
-                                <th scope="col">Bukti Pembayaran</th>
+                                {{-- <th scope="col">Bukti Pembayaran</th> --}}
                                 <th scope="col">Total Bayar</th>
+                                <th scope="col">No HP</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -119,8 +131,17 @@
                                     <td>{{ $order->tanggal_berangkat }}</td>
                                     <td>{{ $order->jam }}</td>
                                     <td>{{ $order->jumlah_kursi }}</td>
-                                    <td>{{ $order->file }}</td>
+                                    {{-- <td>
+                                        <a href="{{ asset('orders/' . $order->file) }}" target="__blank">
+                                            <img width="100" src="{{ asset('orders/' . $order->file) }}"
+                                                alt="">
+
+                                        </a>
+                                    </td> --}}
                                     <td>{{ $order->total }}</td>
+                                    @foreach ($users->where('id', $order->user_id) as $user)
+                                        <td>{{ $user->nomor_hp }}</td>
+                                    @endforeach
                                     <td>
                                         <div class="flex justify-content bg-red">
                                             @if ($order->status === 'Masuk')
@@ -128,8 +149,8 @@
                                                     action="{{ route('admin.proses', ['id' => $order->id]) }}">
                                                     @csrf
                                                     <input type="hidden" name="status" value="Diterima">
-                                                    <button type="submit" class=" bg-info" href="#">
-                                                       
+                                                    <button type="submit" class="btn btn-primary" href="#">
+
                                                         Terima Pesanan
                                                     </button>
                                                 </form>
@@ -137,8 +158,7 @@
                                                     action="{{ route('admin.proses', ['id' => $order->id]) }}">
                                                     @csrf
                                                     <input type="hidden" name="status" value="Ditolak">
-                                                    <button type="submit" class=" bg-danger text-white"
-                                                        href="#">
+                                                    <button type="submit" class="btn btn-danger" href="#">
                                                         <span data-feather="edit"></span>
                                                         Tolak Pesanan
                                                     </button>
@@ -149,8 +169,7 @@
                                                     action="{{ route('admin.proses', ['id' => $order->id]) }}">
                                                     @csrf
                                                     <input type="hidden" name="status" value="Diproses">
-                                                    <button type="submit" class=" bg-secondary text-white"
-                                                        href="#">
+                                                    <button type="submit" class="btn btn-secondary" href="#">
                                                         <span data-feather="edit"></span>
                                                         Proses Pesanan
                                                     </button>
@@ -161,8 +180,7 @@
                                                     action="{{ route('admin.proses', ['id' => $order->id]) }}">
                                                     @csrf
                                                     <input type="hidden" name="status" value="Selesai">
-                                                    <button type="submit" class=" bg-success text-white"
-                                                        href="#">
+                                                    <button type="submit" class="btn btn-success" href="#">
                                                         <span data-feather="edit"></span>
                                                         Konfirmasi Pesanan
                                                     </button>
@@ -185,6 +203,7 @@
             </main>
         </div>
     </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
