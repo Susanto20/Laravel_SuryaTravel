@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
-  
+
+use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use PDF;
-  
+
 class PDFController extends Controller
 {
     /**
@@ -14,8 +17,10 @@ class PDFController extends Controller
     public function generatePDF()
     {
         $data = ['title' => 'Welcome to ItSolutionStuff.com'];
-        $pdf = PDF::loadView('myPDF', $data);
-  
-        return $pdf->download('itsolutionstuff.pdf');
+        $syarat = Order::all();
+        $users  = User::all();
+        $pdf = PDF::loadView('welcome', compact('syarat', 'users'));
+
+        return $pdf->download('Laporan.pdf');
     }
 }

@@ -15,26 +15,7 @@ class ApiLoginController extends Controller
         // session()->regenerateToken();
         // return redirect()->route('auth.login');
         
-        { 
-            if(Auth::user()->token){ 
-             
-            Auth::user()->tokens->each(function($token,$key){ 
-            $token->delete(); 
-            }); 
-            return response()->json([ 
-            'status'=>200, 
-            'message'=>'Logout successfully', 
-            ]); 
-            }else{ 
-            return response()->json([ 
-            'status'=>419, 
-            'message'=>'Logout successfully', 
-            ]); 
-            } 
-            } 
     }
-
-
 
     public function login(Request $request)
     {

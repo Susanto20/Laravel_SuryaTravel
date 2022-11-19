@@ -24,7 +24,16 @@ Route::get('/', function () {
     return view('welcome', compact('syarat', 'users'));
     // return view('welcome');
 })->name('admin.index');
+
+Route::get('/table', function () {
+    $syarat = Order::all();
+    $users  = User::all();
+    return view('table', compact('syarat', 'users'));
+    // return view('welcome');
+})->name('admin.table');
+
 Route::post('proses-pesanan/{id}', [AdminController::class, 'proses'])->name('admin.proses');
+
 Route::get('/order', function () {
     return view('order');
 });
@@ -38,5 +47,5 @@ Route::get('/sign_in', function () {
 })->name('auth.login');
 
 Route::post('login', [ApiLoginController::class, 'loginWeb'])->name('login.store');
-Route::get('logout', [ApiLoginController::class, 'logoutWeb'])->name('logout.store');
+Route::post('logout', [ApiLoginController::class, 'logoutWeb'])->name('logout.store');
 Route::get('generate-pdf','PDFController@generatePDF');
