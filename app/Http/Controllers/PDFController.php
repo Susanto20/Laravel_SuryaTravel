@@ -17,9 +17,9 @@ class PDFController extends Controller
     public function generatePDF()
     {
         $data = ['title' => 'Welcome to ItSolutionStuff.com'];
-        $syarat = Order::all();
+        $syarat = Order::where('status', 'Selesai')->get();
         $users  = User::all();
-        $pdf = PDF::loadView('welcome', compact('syarat', 'users'));
+        $pdf = PDF::loadView('order_selesai', compact('syarat', 'users'));
 
         return $pdf->download('Laporan.pdf');
     }

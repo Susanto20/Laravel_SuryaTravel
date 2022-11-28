@@ -10,9 +10,16 @@ class ApiOrderController extends Controller
 {
     public function index(Request $request)
     {
+        $keyword = $request->has('keyword');
+        $orders = Order::all();
+
+        if ($keyword) {
+            $orders = Order::where('jam', 'LIKE', $request->keyword)->get();
+            return view('order', compact('syarat', 'users'));
+        }
+
         if ($request->has('uid')) {
             $orders = Order::where('user_id', $request->uid)->get();
-
             return $orders;
         }
     }

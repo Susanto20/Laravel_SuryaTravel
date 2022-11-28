@@ -31,7 +31,7 @@
                         </form>
                         <form method="POST" action="{{ route('admin.proses', ['id' => $order->id]) }}">
                             @csrf
-                            <input type="hidden" name="status" value="Ditolak">
+                            <input type="hidden" name="status" value="Ditolak, kursi habis">
                             <button type="submit" class="btn btn-danger btn-sm" href="#">
                                 &ensp;Tolak Pesanan
                             </button>
@@ -58,7 +58,7 @@
                     @if ($order->status === 'Selesai')
                         Pesanan Selesai
                     @endif
-                    @if ($order->status === 'Ditolak')
+                    @if ($order->status === 'Ditolak, kursi habis')
                         <span class="text-danger">Pesanan Ditolak</span>
                     @endif
 

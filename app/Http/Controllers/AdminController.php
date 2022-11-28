@@ -13,6 +13,11 @@ class AdminController extends Controller
 
         $order->status = $request->status;
         $order->update();
-        return back();
+        if ($request->status === 'Selesai') {
+            return redirect()->route('pesanan.selesai');
+        } else {
+
+            return back();
+        }
     }
 }
