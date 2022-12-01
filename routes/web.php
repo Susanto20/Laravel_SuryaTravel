@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
-Route::get('/', function () {
-    $syarat = Order::where('status',  'Terkirim')->get();
-    $users  = User::all();
-    return view('welcome', compact('syarat', 'users'));
-    // return view('welcome');
-})->name('admin.index');
+// Route::get('/', function () {
+//     $syarat = Order::where('status',  'Terkirim')->get();
+//     $users  = User::all();
+//     return view('welcome', compact('syarat', 'users'));
+//     // return view('welcome');
+// })->name('admin.index');
 
 Route::get('/table', function (Request $request) {
     $users  = User::all();
@@ -33,7 +33,7 @@ Route::get('/table', function (Request $request) {
 
 Route::post('proses-pesanan/{id}', [AdminController::class, 'proses'])->name('admin.proses');
 Route::post('login', [ApiLoginController::class, 'loginWeb'])->name('login.store');
-
+Route::get('/pesanan-terbaru', [OrderController::class, 'pesananTerbaru'])->name('pesanan.terbaru');
 Route::get('/pesanan-diterima', [OrderController::class, 'index'])->name('pesanan.diterima');
 
 Route::get('/pesanan-selesai', function () {
@@ -52,10 +52,13 @@ Route::get('/laporan', function () {
     return view('laporan');
 });
 
+
+Route::get('/', function () {
+    return redirect()->route('auth.login');
+});
 Route::get('/sign_in', function () {
     return view('sign_in');
 })->name('auth.login');
-
 Route::post('login', [ApiLoginController::class, 'loginWeb'])->name('login.store');
 Route::post('logout', [ApiLoginController::class, 'logoutWeb'])->name('logout.store');
 Route::get('generate-pdf', 'PDFController@generatePDF');

@@ -41,7 +41,7 @@
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('admin.index')}}">
+                            <a class="nav-link" aria-current="page" href="{{route('pesanan.terbaru')}}">
                                 <span data-feather="shopping-bag" class="align-text-bottom"></span>
                                 Pesanan Terbaru
                             </a>

@@ -1,5 +1,8 @@
 <tbody>
-    @foreach ($syarat as $order)
+    @if (session()->has('message'))
+        <p class="text-danger">{{ session()->get('message') }}</p>
+    @endif
+    @foreach ($syarat as $key => $order)
         <tr class="border">
             <td class="border">{{ $loop->iteration }}</td>
             @foreach ($users->where('id', $order->user_id) as $user)
@@ -22,13 +25,18 @@
             <td>
                 <div class="flex justify-content bg-red">
                     @if ($order->status === 'Terkirim')
-                        <form method="POST" action="{{ route('admin.proses', ['id' => $order->id]) }}">
-                            @csrf
-                            <input type="hidden" name="status" value="Diterima">
-                            <button type="submit" class="btn btn-primary btn-sm" href="#">
-                                Terima Pesanan
-                            </button>
-                        </form>
+                        @if ($key == 0)
+                            <form method="POST" action="{{ route('admin.proses', ['id' => $order->id]) }}">
+                                @csrf
+                                <input type="hidden" name="status" value="Diterima">
+                                <input type="hidden" name="jam" value="{{ $order->jam }}">
+                                <input type="hidden" name="tanggal_berangkat" value="{{ $order->tanggal_berangkat }}">
+                                <input type="hidden" name="jumlah_kursi" value="{{ $order->jumlah_kursi }}">
+                                <button type="submit" class="btn btn-primary btn-sm" href="#">
+                                    Terima Pesanan
+                                </button>
+                            </form>
+
                         <form method="POST" action="{{ route('admin.proses', ['id' => $order->id]) }}">
                             @csrf
                             <input type="hidden" name="status" value="Ditolak, kursi habis">
@@ -36,6 +44,8 @@
                                 &ensp;Tolak Pesanan
                             </button>
                         </form>
+                        @endif
+
                     @endif
                     @if ($order->status === 'Diterima')
                         <form method="POST" action="{{ route('admin.proses', ['id' => $order->id]) }}">

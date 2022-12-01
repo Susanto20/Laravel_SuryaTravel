@@ -60,7 +60,7 @@ class ApiLoginController extends Controller
                 $token = $user->createToken('user')->accessToken;
                 $data['user'] = $user;
                 $data['token'] = $token;
-                return redirect()->route('admin.index');
+                return redirect()->route('pesanan.terbaru');
             } else {
                 return back();
             }

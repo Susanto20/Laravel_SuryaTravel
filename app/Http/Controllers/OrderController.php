@@ -25,4 +25,11 @@ class OrderController extends Controller
             return view('order', compact('syarat', 'users'));
         }
     }
+
+    public function pesananTerbaru()
+    {
+        $syarat = Order::where('status',  'Terkirim')->get();
+        $users  = User::all();
+        return view('welcome', compact('syarat', 'users'));
+    }
 }

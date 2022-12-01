@@ -21,6 +21,6 @@ class PDFController extends Controller
         $users  = User::all();
         $pdf = PDF::loadView('order_selesai', compact('syarat', 'users'));
 
-        return $pdf->download('Laporan.pdf');
+        return $pdf->download('Laporans.pdf');
     }
 }
